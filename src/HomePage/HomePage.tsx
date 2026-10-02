@@ -4,8 +4,6 @@ import { getUnansweredQuestions } from '../QuestionsData';
 import { Page } from '../PageTitle/Page';
 import { PageTitle } from '../PageTitle/PageTitle';
 
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
 import { PrimaryButton } from '../Styles';
 import { useNavigate } from 'react-router-dom';
 
@@ -49,14 +47,17 @@ export const HomePage = () => {
 
   return (
     <Page>
-      <div css={css` display: flex; align-items: center; justify-content: space-between; `}>
-        <PageTitle>Unanswered Questions</PageTitle>
-        <PrimaryButton onClick={handleAskQuestionClick}>
+      <div className="home-heading">
+        <div>
+          <p className="home-kicker">The community knowledge base</p>
+          <PageTitle>Unanswered Questions</PageTitle>
+        </div>
+        <PrimaryButton className="primary-button" onClick={handleAskQuestionClick}>
           Ask a question
         </PrimaryButton>
       </div>
       {questionsLoading ?
-        (<div>Loading...</div>) : (<QuestionList data={questions} />)
+        (<div className="empty-state" role="status">Loading questions...</div>) : (<QuestionList data={questions} />)
       }
     </Page>
   );

@@ -1,8 +1,6 @@
 import React from 'react';
 import { Page } from '../PageTitle/Page';
 
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react'
 import { useSearchParams } from 'react-router-dom';
 import { QuestionList } from '../Questions/QuestionList';
 import { searchQuestions } from '../QuestionsData';
@@ -33,7 +31,7 @@ export const SearchPage = () => {
     return (
         <Page title="Search Results">
             {search && (
-                <p css={css` font-size: 16px; font-style: italic; margin-top: 0px;`}>
+                <p className="search-context">
                     for "{search}"
                 </p>
             )}
