@@ -64,7 +64,7 @@ export const AskPage = () => {
                         )}
                     </FieldContainer>
                     <FormButtonContainer>
-                        <PrimaryButton type="submit">
+                        <PrimaryButton className="primary-button" type="submit">
                             Submit Your Question
                         </PrimaryButton>
                     </FormButtonContainer>

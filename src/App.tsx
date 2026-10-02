@@ -2,10 +2,6 @@ import React from 'react';
 import { Header } from './Header/Header';
 import { HomePage } from './HomePage/HomePage';
 
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
-import { fontFamily, fontSize, gray2 } from './Styles';
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AskPage } from './Pages/AskPage';
 import { SearchPage } from './Pages/SearchPage';
@@ -24,8 +20,8 @@ const store = configureStore();
 function App() {
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <div css={css` font-family: ${fontFamily}; font-size: ${fontSize}; color: ${gray2}; `}>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <div>
           <Header />
           <Routes>
             <Route path="" element={<HomePage />} />

@@ -6,7 +6,7 @@ import { getQuestion, postAnswer } from '../QuestionsData';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { AnswerList } from '../Answers/AnswerList';
-import { gray3, gray6, Fieldset, FieldContainer, FieldLabel, FieldTextArea, FormButtonContainer, PrimaryButton, FieldError, SubmissionSuccess } from '../Styles';
+import { Fieldset, FieldContainer, FieldLabel, FieldTextArea, FormButtonContainer, PrimaryButton, FieldError, SubmissionSuccess } from '../Styles';
 import { useForm } from 'react-hook-form';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -53,22 +53,22 @@ export const QuestionPage = () => {
 
     return (
         <Page>
-            <div css={css`background-color: white;padding: 15px 20px 20px 20px;border-radius: 4px;border: 1px solid ${gray6};box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.16);`}>
-                <div css={css`font-size: 19px;font-weight: bold;margin: 10px 0px 5px;`}>
+            <article className="question-detail">
+                <h1 className="detail-title">
                     {question === null ? '' : question.title}
-                </div>
+                </h1>
                 {question !== null && (
                     <React.Fragment>
-                        <p css={css`margin-top: 0px;background-color: white;`}>
+                        <p className="detail-content">
                             {question.content}
                         </p>
-                        <div css={css` font-size: 12px;font-style: italic; color: ${gray3};`} >
+                        <div className="metadata">
                             {`Asked by ${question.userName} on
                             ${question.created.toLocaleDateString()} 
                             ${question.created.toLocaleTimeString()}`}
                         </div>
                         <AnswerList data={question.answers} />
-                        <form onSubmit={handleSubmit(submitForm)} css={css`margin-top: 20px;`}>
+                        <form onSubmit={handleSubmit(submitForm)} css={css`margin-top: 28px;`}>
                             <Fieldset
                                 disabled={formState.isSubmitting || successfullySubmitted}
                             >
@@ -91,7 +91,7 @@ export const QuestionPage = () => {
                                     )}
                                 </FieldContainer>
                                 <FormButtonContainer>
-                                    <PrimaryButton type="submit">
+                                    <PrimaryButton className="primary-button" type="submit">
                                         Submit Your Answer
                                     </PrimaryButton>
                                 </FormButtonContainer>
@@ -104,7 +104,7 @@ export const QuestionPage = () => {
                         </form>
                     </React.Fragment>
                 )}
-            </div>
+            </article>
         </Page>
     );
 };

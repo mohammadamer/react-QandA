@@ -1,23 +1,18 @@
 import React from 'react';
 import { AnswerData } from '../QuestionsData';
-import { gray3 } from '../Styles';
-
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
-
 interface Props {
     data: AnswerData;
 }
 
 export const Answer = ({ data }: Props) => (
-    <div css={css`padding: 10px 0px;`}>
-        <div css={css` padding: 10px 0px; font-size: 13px;`}>
+    <article>
+        <p className="answer-content">
             {data.content}
-        </div>
-        <div css={css` font-size: 12px; font-style: italic; color: ${gray3};`}>
+        </p>
+        <div className="metadata">
             {`Answered by ${data.userName} on
                 ${data.created.toLocaleDateString()}
                 ${data.created.toLocaleTimeString()}`}
         </div>
-    </div>
+    </article>
 );
