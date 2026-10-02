@@ -1,46 +1,89 @@
-# Getting Started with Create React App
+# Q&A
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A small question-and-answer community app built with React and TypeScript. Browse unanswered questions, search the question collection, open a discussion, and contribute a question or answer. The interface is responsive and includes client-side form validation.
+
+## Features
+
+- Browse questions that do not have answers.
+- Search question titles and content.
+- Open a question to read its full content and existing answers.
+- Submit questions and answers with required-field and minimum-length validation.
+- Use the interface on desktop and mobile screen sizes.
+
+The app is a front-end demo. Its sample questions and submitted content live in memory in the browser and reset when the page reloads. There is no API, database, account system, or real sign-in flow. The Sign In link currently opens a placeholder page. The sample author is set to `Fred` for submissions.
+
+## Getting Started
+
+### Requirements
+
+- Node.js `20.19.1` (the version specified in `package.json`)
+- npm
+
+### Install and run
+
+```sh
+npm install
+npm start
+```
+
+The development server opens at [http://localhost:3000](http://localhost:3000). It reloads when source files change.
 
 ## Available Scripts
 
-In the project directory, you can run:
+| Command | Description |
+| --- | --- |
+| `npm start` | Start the development server. |
+| `npm test` | Run the Jest and React Testing Library tests. |
+| `npm run build` | Create an optimized production build in `build/`. |
 
-### `npm start`
+## Routes
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+| Path | Screen |
+| --- | --- |
+| `/` | Unanswered questions and the ask-question action. |
+| `/search?criteria=...` | Questions matching the search phrase. |
+| `/questions/:questionId` | Question details, answers, and the answer form. |
+| `/ask` | Form for submitting a question. |
+| `/signin` | Sign-in placeholder. |
+| Any other path | Not-found placeholder. |
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Question and Answer Rules
 
-### `npm test`
+- A question title is required and must contain at least 10 characters.
+- Question content is required and must contain at least 50 characters.
+- Answer content is required and must contain at least 50 characters.
+- Search matches question titles and content, without case sensitivity.
+- New questions and answers are added to the in-memory sample collection.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Project Structure
 
-### `npm run build`
+```text
+public/                 Static HTML and web app metadata
+src/
+	Answers/              Answer and answer-list components
+	Header/               Branding, search, and sign-in navigation
+	HomePage/             Unanswered question feed
+	Icons/                Shared icons
+	PageTitle/            Shared page wrapper and title
+	Pages/                Ask, search, sign-in, question, and not-found screens
+	Questions/            Question item and question-list components
+	App.tsx               Routes and Redux provider
+	QuestionsData.ts      Sample data and in-memory async operations
+	Store.ts              Redux state and actions
+	Styles.ts             Shared Emotion form controls and button
+	index.css             Global theme, layout, and responsive styles
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Implementation Notes
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- React 19 and TypeScript provide the component and type system.
+- React Router handles client-side navigation.
+- Redux stores the current unanswered list, viewed question, and search results.
+- `QuestionsData.ts` supplies sample records and asynchronous operations with a short simulated delay; it is not a persistence layer.
+- React Hook Form handles form state and validation.
+- Emotion provides shared styled controls, while `index.css` defines the global visual system and responsive component styles.
+- Create React App (`react-scripts`) provides the development server, test runner, and production build.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Testing and Production Build
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Run the test suite with `npm test`. Create the static production bundle with `npm run build`, then host the contents of `build/` on a static web server configured to serve `index.html` for client-side routes.
